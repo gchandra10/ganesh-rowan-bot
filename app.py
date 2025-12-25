@@ -1,7 +1,7 @@
 import os, streamlit as st
 
 st.set_page_config(
-    page_title="Ganesh Chandrasekaran Course Assistant – Rowan University",
+    page_title="Ganesh Chandrasekaran :: AI Course Assistant – Rowan University",
     page_icon=":university:",
     layout="centered"
 )
@@ -121,8 +121,9 @@ st.caption("Build: 0.11")
 st.markdown(
     """
     <h1 class="page-title">
-    Ganesh Chandrasekaran Course Assistant – Rowan University
+    Ganesh Chandrasekaran :: AI Course Assistant
     </h1>
+    <h3>For students in my courses at Rowan University</h3>
     """,
     unsafe_allow_html=True,
 )
