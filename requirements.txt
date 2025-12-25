@@ -1,0 +1,4 @@
+streamlit==1.38.0
+openai==2.14.0
+databricks-vectorsearch==0.63.0
+dbutils==3.1.2
