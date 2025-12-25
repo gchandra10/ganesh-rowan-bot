@@ -111,6 +111,8 @@ textarea:focus {
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
+st.caption("Build: 0.9")
+
 st.markdown(
     """
     <h1 class="page-title">
