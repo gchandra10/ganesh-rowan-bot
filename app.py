@@ -118,15 +118,12 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 st.caption("Build: 0.11")
 
-st.markdown(
-    """
-    <h1 class="page-title">
-    Ganesh Chandrasekaran :: AI Course Assistant
-    </h1>
-    <h3>For students in my courses at Rowan University</h3>
-    """,
-    unsafe_allow_html=True,
-)
+st.markdown("""
+<h1 class="page-title">Ganesh Chandrasekaran – Course Assistant</h1>
+<p style="color: var(--text-main); margin-top: -0.3rem; font-size: 1rem;">
+Supporting students in my Rowan University courses
+</p>
+""", unsafe_allow_html=True)
 
 st.markdown(
     """
