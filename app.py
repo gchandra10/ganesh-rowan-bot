@@ -78,6 +78,10 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 st.title("Ganesh Chandrasekaran (Bot) - Rowan University")
 
+
+def clear_question():
+    st.session_state["question_box"] = ""
+
 def _normalize_vs_results(res):
     # Handle common response shapes; return list[dict]
     if isinstance(res, dict) and isinstance(res.get("data"), list):
@@ -98,7 +102,7 @@ def _normalize_vs_results(res):
             return []
     return []
 
-question = st.text_area("Ask a question about the courses, syllabus, final project, ai policy, tools to learn.", key="question_box", height=150)
+question = st.text_area("Ask a question about the courses, syllabus, final project, ai policy, tools to learn.", key="question_box")
 
 col_ask, col_clear = st.columns([3, 1])
 
@@ -106,11 +110,10 @@ with col_ask:
     ask_clicked = st.button("Ask the Bot", key="ask_btn", use_container_width=True)
 
 with col_clear:
-    clear_clicked = st.button("Clear Text", key="clear_btn", use_container_width=True)
-
-if clear_clicked:
-    st.session_state["question_box"] = ""
-    st.rerun()
+    st.button("Clear Text", 
+        key="clear_btn", 
+        on_click=clear_question,
+        use_container_width=True)
 
 if ask_clicked and st.session_state.question_box.strip():
     try:
