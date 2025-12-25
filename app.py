@@ -125,9 +125,10 @@ st.markdown("""
 <strong>Purpose.</strong> This tool is not a replacement for general-purpose AI systems. It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses and relies solely on the course materials provided.
 
 Please use it responsibly and verify answers with official course resources.
-
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown(" ")
 
 question = st.text_area("Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, or recommended tools to learn.", key="question_box")
 
