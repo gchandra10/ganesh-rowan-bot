@@ -19,12 +19,12 @@ LLM_MODEL = "databricks-meta-llama-3-1-405b-instruct"
 CUSTOM_CSS = """
     <style>
     :root {
-        --bg: #531914;
-        --bg-elevated: #6d241d;
-        --accent: #f4b183;
-        --accent-hover: #e3955d;
-        --text-main: #fdf7f2;
-        --text-muted: #e0c9c0;
+        --bg: #7a2a22;
+        --bg-elevated: #8e342a;
+        --accent: #f6c39b;
+        --accent-hover: #e8a779;
+        --text-main: #fff8f3;
+        --text-muted: #f0d7cd;
     }
 
     /* App background and base font */
@@ -47,7 +47,7 @@ CUSTOM_CSS = """
     textarea {
         background-color: var(--bg-elevated);
         color: var(--text-main);
-        border: 1px solid var(--accent);
+        border: 2px solid var(--accent);
     }
     .stTextInput > div > div > input::placeholder,
     textarea::placeholder {
@@ -68,10 +68,19 @@ CUSTOM_CSS = """
         border: none;
         padding: 0.4rem 1.2rem;
         font-weight: 600;
+        font-size: 1rem;
     }
     .stButton > button:hover {
         background-color: var(--accent-hover);
     }
+    
+    @media (max-width: 800px) {
+    h1 {
+        font-size: 1.3rem;
+        white-space: normal;
+    }
+}
+    
     </style>
 """
 
