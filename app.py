@@ -106,14 +106,13 @@ with col_ask:
     ask_clicked = st.button("Ask the Bot", key="ask_btn", use_container_width=True)
 
 with col_clear:
-    clear_clicked = st.button("Clear", key="clear_btn", use_container_width=True)
+    clear_clicked = st.button("Clear Text", key="clear_btn", use_container_width=True)
 
 if clear_clicked:
     st.session_state["question_box"] = ""
-    st.session_state.clear()
     st.rerun()
 
-if ask_clicked and question.strip():
+if ask_clicked and st.session_state.question_box.strip():
     try:
         with st.spinner("Searching and answering..."):
             # Vector Search
@@ -124,7 +123,7 @@ if ask_clicked and question.strip():
             )
             index = vsc.get_index(VS_ENDPOINT, VS_INDEX)
             res = index.similarity_search(
-                query_text=question,
+                query_text=st.session_state.question_box,
                 columns=["title","url_or_path","chunk_text","section","page","doc_id"],
                 num_results=5
             )
