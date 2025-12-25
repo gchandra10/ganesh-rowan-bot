@@ -102,7 +102,7 @@ def _normalize_vs_results(res):
             return []
     return []
 
-question = st.text_area("Ask a question about the courses, syllabus, final project, ai policy, tools to learn.", key="question_box")
+question = st.text_area("Ask a question about the courses, syllabus, grading, assignments, final project, ai policy, tools to learn.", key="question_box")
 
 col_ask, col_clear = st.columns([3, 1])
 
