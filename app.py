@@ -16,86 +16,130 @@ VS_ENDPOINT = "prof-vs-endpoint"
 VS_INDEX = "workspace.ganesh_rowan_bot.docs_index"
 LLM_MODEL = "databricks-meta-llama-3-1-405b-instruct"
 
+
 CUSTOM_CSS = """
-    <style>
-    :root {
-        --bg: #7a2a22;
-        --bg-elevated: #8e342a;
-        --accent: #f6c39b;
-        --accent-hover: #e8a779;
-        --text-main: #fff8f3;
-        --text-muted: #f0d7cd;
-    }
-
-    /* App background and base font */
-    .stApp {
-        background-color: var(--bg);
-        color: var(--text-main);
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    /* Headings and body text */
-    h1, h2, h3, h4, h5, h6 {
-        color: var(--text-main);
-    }
-    p, label, span, .stMarkdown {
-        color: var(--text-main);
-    }
-
-    /* Text inputs and textareas */
-    .stTextInput > div > div > input,
-    textarea {
-        background-color: var(--bg-elevated);
-        color: var(--text-main);
-        border: 2px solid var(--accent);
-    }
-    .stTextInput > div > div > input::placeholder,
-    textarea::placeholder {
-        color: var(--text-muted);
-    }
-    .stTextInput > div > div > input:focus,
-    textarea:focus {
-        outline: none;
-        border-color: var(--accent-hover);
-        box-shadow: 0 0 0 1px var(--accent-hover);
-    }
-
-    /* Buttons */
-    .stButton > button {
-        background-color: var(--accent);
-        color: #000000;
-        border-radius: 999px;
-        border: none;
-        padding: 0.4rem 1.2rem;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-    .stButton > button:hover {
-        background-color: var(--accent-hover);
-    }
-    
-    @media (max-width: 480px) {
-    h1 {
-        font-size: 1.2rem;
-        white-space: normal;
-    }
+<style>
+:root {
+    --bg: #7a2a22;
+    --bg-elevated: #8e342a;
+    --accent: #f6c39b;
+    --accent-hover: #e8a779;
+    --text-main: #fff8f3;
+    --text-muted: #f0d7cd;
 }
-    
-    </style>
-"""
 
-st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+/* App background and base font */
+.stApp {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
 
-st.markdown("""
-<h1 style="
+/* Headings and body text */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+}
+p, label, span, .stMarkdown {
+    color: var(--text-main);
+}
+
+/* Text inputs and textareas */
+.stTextInput > div > div > input,
+textarea {
+    background-color: var(--bg-elevated);
+    color: var(--text-main);
+    border: 2px solid var(--accent);
+}
+.stTextInput > div > div > input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+.stTextInput > div > div > input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 0 1px var(--accent-hover);
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: var(--accent);
+    color: #000000 !important;
+    border-radius: 999px;
+    border: none;
+    padding: 0.4rem 1.2rem;
+    font-weight: 700;
+    font-size: 1rem;
+}
+.stButton > button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Page title */
+.page-title {
     font-size: 1.9rem;
     margin-bottom: 0.5rem;
     color: var(--text-main);
     white-space: nowrap;
-">
-Ganesh Chandrasekaran Course Assistant – Rowan University
-</h1>
-""", unsafe_allow_html=True)
+}
+
+/* Notice boxes (purpose, disclaimer) */
+.notice-box {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background-color: var(--bg-elevated);
+    color: var(--text-main);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Simple spacer */
+.spacer {
+    margin-top: 1rem;
+}
+
+/* Mobile: shrink main title */
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.2rem;
+        white-space: normal;
+    }
+}
+</style>
+"""
+st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <h1 class="page-title">
+    Ganesh Chandrasekaran Course Assistant – Rowan University
+    </h1>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="notice-box">
+    <strong>Purpose.</strong> This tool is not a replacement for general purpose AI systems.
+    It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses
+    and relies solely on the course materials provided.<br><br>
+    Please use it responsibly and verify answers with official course resources.
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+
+question = st.text_area(
+    "Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, or recommended tools to learn.",
+    key="question_box",
+)
+
+col_ask, col_clear = st.columns([3, 1])
 
 
 def clear_question():
@@ -121,53 +165,28 @@ def _normalize_vs_results(res):
             return []
     return []
 
-st.markdown("""
-<div style="
-    margin-top: 1.5rem;
-    padding: 1rem 1.25rem;
-    background-color: #6d241d;
-    color: #fdf7f2;
-    border-left: 4px solid #f4b183;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-">
-<strong>Purpose.</strong> This tool is not a replacement for general-purpose AI systems. It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses and relies solely on the course materials provided. <br/><br/>
-
-Please use it responsibly and verify answers with official course resources.</div>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<div style="margin-top: 1rem;"></div>
-""", unsafe_allow_html=True)
-
-question = st.text_area("Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, or recommended tools to learn.", key="question_box")
-
-col_ask, col_clear = st.columns([3, 1])
-
 with col_ask:
-    ask_clicked = st.button("Ask the Bot", key="ask_btn", use_container_width=True)
+    ask_clicked = st.button("Ask", key="ask_btn", use_container_width=True)
 
 with col_clear:
-    st.button("Clear Text", 
-        key="clear_btn", 
+    st.button(
+        "Clear",
+        key="clear_btn",
         on_click=clear_question,
-        use_container_width=True)
+        use_container_width=True,
+    )
 
-st.markdown("""
-<div style="
-    margin-top: 1.5rem;
-    padding: 1rem 1.25rem;
-    background-color: #6d241d;
-    color: #fdf7f2;
-    border-left: 4px solid #f4b183;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-">
-<strong>Disclaimer.</strong> This response is generated by an AI system using documents provided for some of the recent courses. The system is still in early development. If you are unsure about the answer or need clarity for academic or policy decisions, contact <strong>Ganesh Chandrasekaran</strong> directly.
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="notice-box">
+    <strong>Disclaimer.</strong> This response is generated by an AI system using documents
+    provided for some of the recent courses. The system is in early development. If you are
+    unsure about the answer or need clarity for academic or policy decisions, contact
+    <strong>Ganesh Chandrasekaran</strong> directly.
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 if ask_clicked and st.session_state.question_box.strip():
     try:
@@ -186,7 +205,7 @@ if ask_clicked and st.session_state.question_box.strip():
             )
             rows = _normalize_vs_results(res)
             if not rows:
-                st.warning("No matching passages yet. Try rephrasing your question or reach out to Professor Ganesh Chandra via email.")
+                st.warning("No matching passages. Try rephrasing or contact Professor Ganesh Chandrasekaran for help.")
                 st.stop()
 
             # Build context
@@ -227,7 +246,6 @@ if ask_clicked and st.session_state.question_box.strip():
         st.markdown("### Sources")
         for row in rows:
             t = row.get("title") or ""
-            # u = row.get("url_or_path") or ""
             if t:
                 st.markdown(f"- [{t}]")
 
