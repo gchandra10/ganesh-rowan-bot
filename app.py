@@ -122,13 +122,14 @@ st.markdown("""
     font-size: 0.9rem;
     line-height: 1.4;
 ">
-<strong>Purpose.</strong> This tool is not a replacement for general-purpose AI systems. It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses and relies solely on the course materials provided. <br/>
+<strong>Purpose.</strong> This tool is not a replacement for general-purpose AI systems. It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses and relies solely on the course materials provided. <br/><br/>
 
 Please use it responsibly and verify answers with official course resources.</div>
 """, unsafe_allow_html=True)
 
-st.markdown(" ")
-st.markdown(" ")
+st.markdown("""
+<div style="margin-top: 1rem;"></div>
+""", unsafe_allow_html=True)
 
 question = st.text_area("Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, or recommended tools to learn.", key="question_box")
 
