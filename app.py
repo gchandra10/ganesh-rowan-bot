@@ -64,12 +64,17 @@ textarea:focus {
 /* Buttons */
 .stButton > button {
     background-color: var(--accent);
-    color: #000000 !important;
     border-radius: 999px;
     border: none;
     padding: 0.4rem 1.2rem;
-    font-weight: 800;
+}
+
+/* Text inside the button (Streamlit wraps label in <p>) */
+.stButton > button p {
+    color: #000000 !important;
+    font-weight: 800 !important;
     font-size: 1.2rem;
+    text-transform: none !important;
 }
 .stButton > button:hover {
     background-color: var(--accent-hover);
@@ -111,7 +116,7 @@ textarea:focus {
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-st.caption("Build: 0.10")
+st.caption("Build: 0.11")
 
 st.markdown(
     """
