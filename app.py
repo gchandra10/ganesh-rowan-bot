@@ -98,7 +98,7 @@ def _normalize_vs_results(res):
             return []
     return []
 
-question = st.text_area("Ask a question about the courses, syllabus, final project, ai policy, tools to learn.")
+question = st.text_area("Ask a question about the courses, syllabus, final project, ai policy, tools to learn.", key="question_box", height=150)
 
 col_ask, col_clear = st.columns([3, 1])
 
@@ -109,6 +109,7 @@ with col_clear:
     clear_clicked = st.button("Clear", key="clear_btn", use_container_width=True)
 
 if clear_clicked:
+    st.session_state["question_box"] = ""
     st.session_state.clear()
     st.rerun()
 
