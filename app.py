@@ -1,8 +1,9 @@
 import os, streamlit as st
 
 st.set_page_config(
-    page_title="Ganesh Chandrasekaran (Bot) - Rowan University",
-    page_icon=":robot_face:"
+    page_title="Ganesh Chandrasekaran Course Assistant – Rowan University",
+    page_icon=":university:",
+    layout="centered"
 )
 
 from openai import OpenAI
@@ -78,12 +79,12 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 st.markdown("""
 <h1 style="
-    font-size: 2.1rem;
+    font-size: 1.9rem;
     margin-bottom: 0.5rem;
     color: var(--text-main);
     white-space: nowrap;
 ">
-Ganesh Chandrasekaran (Bot) - Rowan University
+Ganesh Chandrasekaran Course Assistant – Rowan University
 </h1>
 """, unsafe_allow_html=True)
 
