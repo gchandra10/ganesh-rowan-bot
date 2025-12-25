@@ -74,9 +74,9 @@ CUSTOM_CSS = """
         background-color: var(--accent-hover);
     }
     
-    @media (max-width: 800px) {
+    @media (max-width: 480px) {
     h1 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         white-space: normal;
     }
 }
