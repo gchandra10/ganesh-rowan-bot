@@ -123,6 +123,9 @@ st.markdown("""
     line-height: 1.4;
 ">
 <strong>Purpose.</strong> This tool is not a replacement for general-purpose AI systems. It is built exclusively for students in <strong>Ganesh Chandrasekaran’s</strong> courses and relies solely on the course materials provided.
+
+Please use it responsibly and verify answers with official course resources.
+
 </div>
 """, unsafe_allow_html=True)
 
