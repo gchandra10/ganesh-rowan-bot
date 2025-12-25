@@ -68,8 +68,8 @@ textarea:focus {
     border-radius: 999px;
     border: none;
     padding: 0.4rem 1.2rem;
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 800;
+    font-size: 1.2rem;
 }
 .stButton > button:hover {
     background-color: var(--accent-hover);
@@ -111,7 +111,7 @@ textarea:focus {
 """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-st.caption("Build: 0.9")
+st.caption("Build: 0.10")
 
 st.markdown(
     """
@@ -168,11 +168,11 @@ def _normalize_vs_results(res):
     return []
 
 with col_ask:
-    ask_clicked = st.button("Ask", key="ask_btn", use_container_width=True)
+    ask_clicked = st.button("ASK", key="ask_btn", use_container_width=True)
 
 with col_clear:
     st.button(
-        "Clear",
+        "CLEAR",
         key="clear_btn",
         on_click=clear_question,
         use_container_width=True,
