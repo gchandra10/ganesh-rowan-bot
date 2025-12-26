@@ -21,7 +21,7 @@ with open("styles.css", "r") as f:
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-st.caption("Build: 0.12")
+st.caption("Build: 0.13")
 
 st.markdown("""
     <h1 class="page-title">Ganesh Chandrasekaran – Course Assistant</h1>
@@ -45,7 +45,7 @@ st.markdown(
 st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
 question = st.text_area(
-    "Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, or recommended tools to learn.",
+    "Ask a question about the courses, prerequisites, syllabus, grading, assignments, final project, AI policy, Mentoring or recommended tools to learn.",
     key="question_box",
 )
 
@@ -150,10 +150,10 @@ if ask_clicked and st.session_state.question_box.strip():
         st.markdown(f"**{out.choices[0].message.content}**", unsafe_allow_html=False)
 
         st.markdown("### Sources")
-        for row in rows:
-            t = row.get("title") or ""
-            if t:
-                st.markdown(f"- [{t}]")
+        titles = {row.get("title", "") for row in rows if row.get("title")}
+
+        for t in sorted(titles):
+            st.markdown(f"- {t}")
 
     except Exception as e:
         st.exception(e)
