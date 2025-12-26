@@ -21,7 +21,7 @@ with open("styles.css", "r") as f:
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
-st.caption("Build: 0.14")
+st.caption("Build: 0.15")
 
 st.markdown("""
     <h1 class="page-title">Ganesh Chandrasekaran – Course Assistant</h1>
@@ -99,14 +99,16 @@ st.markdown(
 
 if ask_clicked and st.session_state.question_box.strip():
     try:
-        with st.spinner("Searching and answering..."):
-            # Vector Search
+        with st.spinner("Searching and answering... Give me a moment."):
+            
             vsc = VectorSearchClient(
                 workspace_url=DATABRICKS_HOST,
                 personal_access_token=DATABRICKS_TOKEN,
                 disable_notice=True
             )
+            
             index = vsc.get_index(VS_ENDPOINT, VS_INDEX)
+
             res = index.similarity_search(
                 query_text=st.session_state.question_box,
                 columns=["title","url_or_path","chunk_text","section","page","doc_id"],
@@ -117,7 +119,7 @@ if ask_clicked and st.session_state.question_box.strip():
                 st.warning("No matching passages. Try rephrasing or contact Professor Ganesh Chandrasekaran for help.")
                 st.stop()
 
-            # Build context
+            # Context for RAG
             contexts = []
             for row in rows:
                 title = row.get("title") or ""
@@ -128,6 +130,7 @@ if ask_clicked and st.session_state.question_box.strip():
                     cite += f" (p.{page})"
                 chunk = row.get("chunk_text") or ""
                 contexts.append(f"[Source] {cite}\n{chunk}")
+                
             rag_context = "\n\n".join(contexts)
 
             client = OpenAI(
@@ -135,8 +138,8 @@ if ask_clicked and st.session_state.question_box.strip():
                 base_url=f"{DATABRICKS_HOST.rstrip('/')}/serving-endpoints"
             )
             prompt = (
-                "Answer using ONLY the context. Keep the sources title separately so it can be referenced." 
-                "If the context does not contain the answer, say you don't know and contact Ganesh Chandrasekaran directly.\n\n"
+                "Answer using ONLY the context. Provide the unique title and URL of the source document(s) used to answer the question below the answer. \n"
+                "If the context does not contain the answer, say you don't know and contact Professor Ganesh Chandrasekaran directly.\n\n"
                 f"Question: {question}\n\nContext:\n{rag_context}"
             )
             out = client.chat.completions.create(
@@ -147,13 +150,13 @@ if ask_clicked and st.session_state.question_box.strip():
         
         st.markdown("### Answer")
         #st.write(out.choices[0].message.content)
-        st.markdown(f"**{out.choices[0].message.content}**", unsafe_allow_html=False)
+        st.markdown(f"{out.choices[0].message.content}", unsafe_allow_html=False)
 
-        st.markdown("### Sources")
-        titles = {row.get("title", "") for row in rows if row.get("title")}
+        # st.markdown("### Sources")
+        # titles = {row.get("title", "") for row in rows if row.get("title")}
 
-        for t in sorted(titles):
-            st.markdown(f"- {t}")
+        # for t in sorted(titles):
+        #     st.markdown(f"- {t}")
 
     except Exception as e:
         st.exception(e)
