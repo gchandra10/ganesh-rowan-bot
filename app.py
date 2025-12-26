@@ -12,8 +12,8 @@ from databricks.vector_search.client import VectorSearchClient
 # Consider reading from environment or Streamlit secrets
 DATABRICKS_HOST = st.secrets.get("DATABRICKS_HOST") 
 DATABRICKS_TOKEN = st.secrets.get("DATABRICKS_TOKEN")
-VS_ENDPOINT = st.secrets.get("VS_ENDPOINT")
-VS_INDEX = st.secrets.get("VS_INDEX")
+VS_ENDPOINT = "prof-vs-endpoint"
+VS_INDEX = "workspace.ganesh_rowan_bot.docs_index"
 LLM_MODEL = st.secrets.get("LLM_MODEL")
 
 with open("styles.css", "r") as f:
