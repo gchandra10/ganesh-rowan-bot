@@ -1,0 +1,94 @@
+:root {
+    --bg: #7a2a22;
+    --bg-elevated: #8e342a;
+    --accent: #f6c39b;
+    --accent-hover: #e8a779;
+    --text-main: #fff8f3;
+    --text-muted: #f0d7cd;
+}
+
+/* App background and base font */
+.stApp {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Headings and body text */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+}
+p, label, span, .stMarkdown {
+    color: var(--text-main);
+}
+
+/* Text inputs and textareas */
+.stTextInput > div > div > input,
+textarea {
+    background-color: var(--bg-elevated);
+    color: var(--text-main);
+    border: 2px solid var(--accent);
+}
+.stTextInput > div > div > input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+.stTextInput > div > div > input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 0 1px var(--accent-hover);
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: var(--accent);
+    border-radius: 999px;
+    border: none;
+    padding: 0.4rem 1.2rem;
+}
+
+/* Text inside the button (Streamlit wraps label in <p>) */
+.stButton > button p {
+    color: #000000 !important;
+    font-weight: 800 !important;
+    font-size: 1.2rem;
+    text-transform: none !important;
+}
+.stButton > button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Page title */
+.page-title {
+    font-size: 1.9rem;
+    margin-bottom: 0rem !important;
+    padding-bottom: 0rem !important;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+/* Notice boxes (purpose, disclaimer) */
+.notice-box {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background-color: var(--bg-elevated);
+    color: var(--text-main);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Simple spacer */
+.spacer {
+    margin-top: 1rem;
+}
+
+/* Mobile: shrink main title */
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.2rem;
+        white-space: normal;
+    }
+}
